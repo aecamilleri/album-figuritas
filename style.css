@@ -254,3 +254,134 @@ font-size:32px;
 grid-template-columns:repeat(2,1fr);
 }
 }
+.album-cover-worldcup{
+position:relative;
+max-width:760px;
+min-height:520px;
+margin:10vh auto 0;
+padding:40px;
+background:#ffffff;
+overflow:hidden;
+border-radius:26px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.cover-center{
+position:relative;
+z-index:3;
+text-align:center;
+}
+
+.year-mark{
+font-size:120px;
+line-height:.8;
+font-weight:900;
+letter-spacing:-8px;
+color:#111;
+}
+
+.trophy{
+font-size:72px;
+margin:-20px 0 10px;
+}
+
+.album-cover-worldcup h1{
+font-size:42px;
+font-weight:900;
+letter-spacing:1px;
+margin-bottom:10px;
+}
+
+.album-cover-worldcup p{
+font-size:18px;
+font-weight:bold;
+text-transform:uppercase;
+letter-spacing:1px;
+margin-bottom:28px;
+}
+
+.album-cover-worldcup button{
+background:#111;
+color:#ffffff;
+padding:14px 28px;
+border-radius:999px;
+}
+
+.cover-pattern{
+position:absolute;
+top:0;
+bottom:0;
+width:170px;
+display:grid;
+grid-template-rows:repeat(6,1fr);
+z-index:1;
+}
+
+.left-pattern{
+left:0;
+}
+
+.right-pattern{
+right:0;
+}
+
+.cover-pattern::before{
+content:"";
+display:block;
+height:100%;
+background:
+linear-gradient(
+to bottom,
+#e53935 0 16%,
+#f57c00 16% 32%,
+#c6d93b 32% 48%,
+#43a047 48% 64%,
+#1e88e5 64% 80%,
+#5e63b6 80% 100%
+);
+opacity:.95;
+}
+
+.left-pattern::after,
+.right-pattern::after{
+content:"";
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle at 100% 18%, transparent 0 36px, #ffffff 37px 70px, transparent 71px),
+radial-gradient(circle at 0% 38%, transparent 0 36px, #ffffff 37px 70px, transparent 71px),
+radial-gradient(circle at 100% 58%, transparent 0 36px, #ffffff 37px 70px, transparent 71px),
+radial-gradient(circle at 0% 78%, transparent 0 36px, #ffffff 37px 70px, transparent 71px);
+}
+
+.right-pattern::after{
+transform:scaleX(-1);
+}
+
+@media(max-width:768px){
+
+.album-cover-worldcup{
+min-height:480px;
+padding:30px;
+}
+
+.cover-pattern{
+width:95px;
+}
+
+.year-mark{
+font-size:78px;
+letter-spacing:-5px;
+}
+
+.trophy{
+font-size:54px;
+}
+
+.album-cover-worldcup h1{
+font-size:30px;
+}
+
+}
