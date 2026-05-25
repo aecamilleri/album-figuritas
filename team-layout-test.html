@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Layout Test</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial, sans-serif;
+background:#ddd0a6;
+padding:30px;
+}
+
+.album-test{
+max-width:1400px;
+margin:auto;
+background:#123f8c;
+display:grid;
+grid-template-columns:1fr 1fr;
+min-height:820px;
+box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.page{
+position:relative;
+padding:34px;
+overflow:hidden;
+}
+
+.left-page{
+background:
+linear-gradient(135deg,#ffffff 0 32%, transparent 32%),
+linear-gradient(90deg,#123f8c 0 70%,#e0a900 70%);
+}
+
+.right-page{
+background:
+linear-gradient(135deg,#e52525 0 18%, transparent 18%),
+linear-gradient(90deg,#123f8c 0 72%,#e0a900 72%);
+}
+
+.left-page .stickers-grid{
+position:relative;
+z-index:2;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+grid-template-areas:
+"header header s1 s2"
+"s3 s4 s5 s6"
+"s7 s8 s9 s10";
+gap:16px;
+}
+
+.right-page .stickers-grid{
+position:relative;
+z-index:2;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+grid-template-areas:
+"s11 s12 special special"
+"s14 s15 s16 s17"
+"group group s18 s19";
+gap:16px;
+margin-top:58px;
+}
+
+.team-header{
+grid-area:header;
+position:relative;
+z-index:2;
+align-self:center;
+padding-right:10px;
+}
+
+.kicker{
+font-size:42px;
+font-weight:900;
+color:#17306f;
+letter-spacing:-2px;
+line-height:.9;
+}
+
+.country-name{
+font-size:40px;
+font-weight:900;
+color:#d92525;
+line-height:.9;
+text-transform:uppercase;
+margin-top:8px;
+}
+
+.association{
+display:flex;
+align-items:center;
+gap:12px;
+margin-top:22px;
+font-size:20px;
+font-weight:800;
+color:#17306f;
+}
+
+.flag{
+width:70px;
+height:46px;
+background:white;
+border:1px solid #ddd;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:12px;
+font-weight:bold;
+}
+
+.slot{
+aspect-ratio:3/4;
+background:#91a8c8;
+border:4px solid #17306f;
+position:relative;
+padding:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
+
+.slot.gold{
+background:#e0a900;
+}
+
+.slot.empty::before{
+content:"";
+position:absolute;
+top:18px;
+left:18px;
+right:18px;
+height:38%;
+background:#f3f3f3;
+border-radius:0 28px 0 0;
+}
+
+.slot.empty::after{
+content:"";
+position:absolute;
+left:18px;
+right:18px;
+bottom:28px;
+height:33%;
+background:#f3f3f3;
+border-radius:0 28px 0 0;
+}
+
+.slot-horizontal{
+aspect-ratio:2/1;
+}
+
+.slot-horizontal.empty::before{
+top:18px;
+left:22px;
+right:22px;
+height:42%;
+}
+
+.slot-horizontal.empty::after{
+display:none;
+}
+
+.code{
+position:absolute;
+top:28px;
+left:0;
+right:0;
+text-align:center;
+font-weight:900;
+color:#7d8fac;
+font-size:18px;
+z-index:2;
+}
+
+.number{
+position:absolute;
+top:52px;
+left:0;
+right:0;
+text-align:center;
+font-weight:900;
+color:#7d8fac;
+font-size:18px;
+z-index:2;
+}
+
+.name{
+position:absolute;
+bottom:48px;
+left:0;
+right:0;
+text-align:center;
+font-size:12px;
+font-weight:800;
+color:#7d8fac;
+z-index:2;
+text-transform:uppercase;
+}
+
+.slot-horizontal .code{
+top:34px;
+}
+
+.slot-horizontal .number{
+top:58px;
+}
+
+.slot-horizontal .name{
+bottom:28px;
+}
+
+.sticker-img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.group-box{
+grid-area:group;
+position:relative;
+width:100%;
+min-height:210px;
+background:#67b556;
+border-radius:140px 0 0 0;
+padding:50px 30px 25px;
+color:white;
+z-index:2;
+align-self:end;
+}
+
+.group-box h3{
+font-size:34px;
+font-weight:900;
+margin-bottom:12px;
+}
+
+.group-teams{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+font-weight:bold;
+font-size:14px;
+}
+
+.match-strip{
+position:absolute;
+left:34px;
+right:34px;
+bottom:24px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+z-index:2;
+}
+
+.match-card{
+background:rgba(255,255,255,.8);
+border-radius:8px;
+padding:8px;
+font-size:11px;
+font-weight:bold;
+color:#17306f;
+}
+
+.spine{
+position:absolute;
+top:0;
+bottom:0;
+right:-10px;
+width:20px;
+background:linear-gradient(90deg,rgba(0,0,0,.25),rgba(255,255,255,.25),rgba(0,0,0,.25));
+z-index:5;
+}
+
+.slot-1{grid-area:s1;}
+.slot-2{grid-area:s2;}
+.slot-3{grid-area:s3;}
+.slot-4{grid-area:s4;}
+.slot-5{grid-area:s5;}
+.slot-6{grid-area:s6;}
+.slot-7{grid-area:s7;}
+.slot-8{grid-area:s8;}
+.slot-9{grid-area:s9;}
+.slot-10{grid-area:s10;}
+.slot-11{grid-area:s11;}
+.slot-12{grid-area:s12;}
+.slot-13{grid-area:special;}
+.slot-14{grid-area:s14;}
+.slot-15{grid-area:s15;}
+.slot-16{grid-area:s16;}
+.slot-17{grid-area:s17;}
+.slot-18{grid-area:s18;}
+.slot-19{grid-area:s19;}
+
+@media(max-width:900px){
+.album-test{
+grid-template-columns:1fr;
+}
+
+.left-page .stickers-grid,
+.right-page .stickers-grid{
+grid-template-columns:repeat(2,1fr);
+grid-template-areas:none;
+}
+
+.team-header,
+.group-box,
+.slot{
+grid-area:auto;
+}
+
+.slot-horizontal{
+aspect-ratio:3/4;
+}
+
+.match-strip{
+position:relative;
+left:auto;
+right:auto;
+bottom:auto;
+margin-top:30px;
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="album-test">
+
+<section class="page left-page">
+
+<div class="stickers-grid">
+
+  <div class="team-header">
+    <div class="kicker">WE ARE</div>
+    <div class="country-name">KOREA REPUBLIC</div>
+
+    <div class="association">
+      <div class="flag">KOR</div>
+      <div>Korea Football<br>Association</div>
+    </div>
+  </div>
+
+  <div class="slot gold empty slot-1">
+    <div class="code">KOR</div>
+    <div class="number">1</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="slot empty slot-2">
+    <div class="code">KOR</div>
+    <div class="number">2</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="slot slot-3">
+    <img src="assets/img/01.png" class="sticker-img" alt="">
+  </div>
+
+  <div class="slot empty slot-4">
+    <div class="code">KOR</div>
+    <div class="number">4</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="slot empty slot-5">
+    <div class="code">KOR</div>
+    <div class="number">5</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="slot empty slot-6">
+    <div class="code">KOR</div>
+    <div class="number">6</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="slot empty slot-7">
+    <div class="code">KOR</div>
+    <div class="number">7</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="slot slot-8">
+    <img src="assets/img/01.png" class="sticker-img" alt="">
+  </div>
+
+  <div class="slot empty slot-9">
+    <div class="code">KOR</div>
+    <div class="number">9</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="slot empty slot-10">
+    <div class="code">KOR</div>
+    <div class="number">10</div>
+    <div class="name">Player Name</div>
+  </div>
+
+</div>
+
+<div class="match-strip">
+  <div class="match-card">Round 1<br>Korea Republic vs Czechia</div>
+  <div class="match-card">Round 2<br>Mexico vs Korea Republic</div>
+  <div class="match-card">Round 3<br>South Africa vs Korea Republic</div>
+</div>
+
+<div class="spine"></div>
+
+</section>
+
+<section class="page right-page">
+
+<div class="stickers-grid">
+
+  <div class="slot empty slot-11">
+    <div class="code">KOR</div>
+    <div class="number">11</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="slot empty slot-12">
+    <div class="code">KOR</div>
+    <div class="number">12</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="slot gold empty slot-13 slot-horizontal">
+    <div class="code">KOR</div>
+    <div class="number">13</div>
+    <div class="name">Special Sticker</div>
+  </div>
+
+  <div class="slot empty slot-14">
+    <div class="code">KOR</div>
+    <div class="number">14</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="slot empty slot-15">
+    <div class="code">KOR</div>
+    <div class="number">15</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="slot empty slot-16">
+    <div class="code">KOR</div>
+    <div class="number">16</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="slot empty slot-17">
+    <div class="code">KOR</div>
+    <div class="number">17</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="group-box">
+    <h3>GROUP A</h3>
+    <div class="group-teams">
+      <span>MEX 🇲🇽</span>
+      <span>RSA 🇿🇦</span>
+      <span>KOR 🇰🇷</span>
+      <span>CZE 🇨🇿</span>
+    </div>
+  </div>
+
+  <div class="slot empty slot-18">
+    <div class="code">KOR</div>
+    <div class="number">18</div>
+    <div class="name">Player Name</div>
+  </div>
+
+  <div class="slot empty slot-19">
+    <div class="code">KOR</div>
+    <div class="number">19</div>
+    <div class="name">Player Name</div>
+  </div>
+
+</div>
+
+</section>
+
+</div>
+
+</body>
+</html>
