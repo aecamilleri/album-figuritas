@@ -74,7 +74,19 @@ div.classList.add(
 );
 
 div.innerHTML =
-"⭐ " + sticker.id;
+
+`
+<img
+src="assets/img/placeholder.png"
+class="sticker-image">
+
+<div class="sticker-number">
+
+FIG ${sticker.id}
+
+</div>
+
+`;
 
 }else{
 
