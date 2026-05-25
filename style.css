@@ -13,23 +13,21 @@ font-style:normal;
 
 body{
 font-family:Arial, Helvetica, sans-serif;
-background:#e4d8b5;
+background:#9fb93b;
 min-height:100vh;
+overflow-x:hidden;
 }
 
 .container{
 width:100%;
-padding:40px;
+padding:0;
+background-color: #9fb93b;
 }
 
 .album-cover{
-max-width:500px;
 margin:25vh auto 0;
 background:white;
-padding:60px;
-border-radius:20px;
 text-align:center;
-box-shadow:0 20px 50px rgba(0,0,0,.15);
 }
 
 .album-cover h1{
@@ -263,13 +261,11 @@ grid-template-columns:repeat(2,1fr);
 }
 .album-cover-worldcup{
 position:relative;
-max-width:760px;
-min-height:520px;
-margin:10vh auto 0;
-padding:40px;
-background:#ffffff;
+width:min(95vw,1400px);
+min-height:100vh;
+margin:0 auto;
+background:#9fb93b;
 overflow:hidden;
-border-radius:26px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -279,6 +275,7 @@ justify-content:center;
 position:relative;
 z-index:3;
 text-align:center;
+transform:scale(1.15);
 }
 
 .year-mark{
@@ -393,32 +390,18 @@ font-size:30px;
 
 }
 
-.album-cover-worldcup{
-position:relative;
-max-width:760px;
-min-height:620px;
-margin:6vh auto 0;
-background:#ffffff;
-border-radius:24px;
-overflow:hidden;
-display:flex;
-align-items:center;
-justify-content:center;
-box-shadow:0 25px 60px rgba(0,0,0,.18);
-}
-
 .cover-side{
 position:absolute;
 top:0;
 bottom:0;
-width:150px;
+width:230px;
 display:flex;
 flex-direction:column;
-justify-content:space-around;
-font-family:"Fifa26", Arial, sans-serif;
-font-size:130px;
+justify-content:space-between;
+font-family:"Fifa26",Arial,sans-serif;
+font-size:25.5rem;
 font-weight:900;
-line-height:.75;
+line-height:0;
 opacity:.95;
 z-index:1;
 }
@@ -429,13 +412,25 @@ z-index:1;
 .cover-side span:nth-child(4){color:#78bd68;}
 
 .cover-side-left{
-left:-20px;
+left:0px;
 align-items:flex-start;
+}
+
+.cover-side-shadow-left{
+z-index:0;
+transform: translate(150px,75px);
+opacity:.3;
 }
 
 .cover-side-right{
 right:-20px;
 align-items:flex-end;
+}
+
+.cover-side-shadow-right{
+z-index:0;
+transform: translate(-150px,75px);
+opacity:.3;
 }
 
 .cover-center{
@@ -454,19 +449,23 @@ letter-spacing:-8px;
 }
 
 .cover-trophy-placeholder{
-width:170px;
-height:260px;
+width:340px;
+height:520px;
 margin:-30px auto 20px;
-border-radius:90px 90px 35px 35px;
-background:linear-gradient(135deg,#d9a323,#fff0a8,#9b6b12);
 display:flex;
 align-items:center;
 justify-content:center;
-font-weight:900;
-font-size:22px;
-color:#533600;
-box-shadow:0 18px 35px rgba(0,0,0,.25);
+background:transparent;
+overflow:visible;
 }
+
+.cover-trophy-placeholder img{
+width:100%;
+height:100%;
+object-fit:contain;
+display:block;
+}
+
 
 .cover-brand{
 font-size:42px;
