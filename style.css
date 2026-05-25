@@ -297,3 +297,38 @@ box-shadow:
 );
 
 }
+
+.empty-number{
+position:absolute;
+bottom:12px;
+right:12px;
+font-size:14px;
+font-weight:bold;
+color:#999;
+z-index:2;
+}
+
+.slot:not(.completed)::before{
+z-index:1;
+}
+
+.country-nav{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin:25px 0;
+}
+
+.country-nav button{
+padding:10px 16px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+background:#ffffff;
+font-weight:bold;
+}
+
+.country-nav button.active-country{
+background:#d6a400;
+color:#ffffff;
+}

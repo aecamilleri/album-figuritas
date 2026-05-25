@@ -18,27 +18,74 @@ document.getElementById(
 "albumGrid"
 );
 
-const TOTAL_STICKERS = 15;
+const pageTitle =
+document.querySelector(
+"#albumPage h2"
+);
+
+const countries = [
+{
+name:"Argentina",
+stickers:[
+{ id:1, img:"assets/img/01.png" },
+{ id:2, img:"assets/img/01.png" },
+{ id:3, img:"assets/img/01.png" },
+{ id:4, img:"assets/img/01.png" },
+{ id:5, img:"assets/img/01.png" }
+]
+},
+{
+name:"Brasil",
+stickers:[
+{ id:6, img:"assets/img/01.png" },
+{ id:7, img:"assets/img/01.png" },
+{ id:8, img:"assets/img/01.png" },
+{ id:9, img:"assets/img/01.png" },
+{ id:10, img:"assets/img/01.png" }
+]
+},
+{
+name:"Francia",
+stickers:[
+{ id:11, img:"assets/img/01.png" },
+{ id:12, img:"assets/img/01.png" },
+{ id:13, img:"assets/img/01.png" },
+{ id:14, img:"assets/img/01.png" },
+{ id:15, img:"assets/img/01.png" }
+]
+}
+];
+
+const TOTAL_STICKERS =
+countries.reduce(
+(total,country)=> total + country.stickers.length,
+0
+);
+
+let currentCountryIndex = 0;
 
 let albumData =
 JSON.parse(
 localStorage.getItem(
 "albumFiguritas"
 )
-) || [];
+) || {};
 
-if(albumData.length === 0){
+countries.forEach((country)=>{
 
-for(let i = 1; i <= TOTAL_STICKERS; i++){
+country.stickers.forEach((sticker)=>{
 
-albumData.push({
-id:i,
-completed:false
+if(albumData[sticker.id] === undefined){
+
+albumData[sticker.id] = false;
+
+}
+
 });
 
-}
+});
 
-}
+saveAlbum();
 
 openBtn.onclick = () => {
 
@@ -54,9 +101,15 @@ createAlbum();
 
 function createAlbum(){
 
+const currentCountry =
+countries[currentCountryIndex];
+
+pageTitle.innerHTML =
+currentCountry.name;
+
 grid.innerHTML = "";
 
-albumData.forEach((sticker)=>{
+currentCountry.stickers.forEach((sticker)=>{
 
 const div =
 document.createElement(
@@ -67,7 +120,7 @@ div.classList.add(
 "slot"
 );
 
-if(sticker.completed){
+if(albumData[sticker.id]){
 
 div.classList.add(
 "completed"
@@ -76,7 +129,7 @@ div.classList.add(
 div.innerHTML =
 `
 <img
-src="assets/img/01.png"
+src="${sticker.img}"
 class="sticker-image">
 
 <div class="sticker-number">
@@ -89,14 +142,20 @@ FIG ${sticker.id}
 }else{
 
 div.innerHTML =
-sticker.id;
+`
+<span class="empty-number">
+
+${sticker.id}
+
+</span>
+`;
 
 }
 
 div.onclick = () => {
 
-sticker.completed =
-!sticker.completed;
+albumData[sticker.id] =
+!albumData[sticker.id];
 
 saveAlbum();
 
@@ -110,7 +169,74 @@ div
 
 });
 
+createCountryNavigation();
+
 updateProgress();
+
+}
+
+function createCountryNavigation(){
+
+let nav =
+document.getElementById(
+"countryNav"
+);
+
+if(!nav){
+
+nav =
+document.createElement(
+"div"
+);
+
+nav.id =
+"countryNav";
+
+nav.classList.add(
+"country-nav"
+);
+
+albumPage.insertBefore(
+nav,
+grid
+);
+
+}
+
+nav.innerHTML = "";
+
+countries.forEach((country,index)=>{
+
+const button =
+document.createElement(
+"button"
+);
+
+button.innerHTML =
+country.name;
+
+if(index === currentCountryIndex){
+
+button.classList.add(
+"active-country"
+);
+
+}
+
+button.onclick = () => {
+
+currentCountryIndex =
+index;
+
+createAlbum();
+
+};
+
+nav.appendChild(
+button
+);
+
+});
 
 }
 
@@ -126,9 +252,7 @@ JSON.stringify(albumData)
 function updateProgress(){
 
 const completed =
-albumData.filter(
-sticker => sticker.completed
-).length;
+Object.values(albumData).filter(Boolean).length;
 
 const progressText =
 document.getElementById(
