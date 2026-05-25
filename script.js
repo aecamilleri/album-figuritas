@@ -77,7 +77,7 @@ div.innerHTML =
 
 `
 <img
-src="assets/img/placeholder.png"
+src="assets/img/01.png"
 class="sticker-image">
 
 <div class="sticker-number">
