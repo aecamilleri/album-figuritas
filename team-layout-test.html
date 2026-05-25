@@ -12,8 +12,18 @@ padding:0;
 box-sizing:border-box;
 }
 
+@font-face{
+font-family:"Fifa26";
+src:url(
+"assets/fonts/fifa-26.otf.woff2"
+) format("woff2");
+
+font-weight:900;
+font-style:normal;
+}
+
 body{
-font-family:Arial, sans-serif;
+font-family:Arial,sans-serif;
 background:#ddd0a6;
 padding:30px;
 }
@@ -36,19 +46,17 @@ overflow:hidden;
 
 .left-page{
 background:
-linear-gradient(135deg,#ffffff 0 32%, transparent 32%),
+linear-gradient(135deg,#ffffff 0 32%,transparent 32%),
 linear-gradient(90deg,#123f8c 0 70%,#e0a900 70%);
 }
 
 .right-page{
 background:
-linear-gradient(135deg,#e52525 0 18%, transparent 18%),
+linear-gradient(135deg,#e52525 0 18%,transparent 18%),
 linear-gradient(90deg,#123f8c 0 72%,#e0a900 72%);
 }
 
 .left-page .stickers-grid{
-position:relative;
-z-index:2;
 display:grid;
 grid-template-columns:repeat(4,1fr);
 grid-template-areas:
@@ -59,8 +67,6 @@ gap:16px;
 }
 
 .right-page .stickers-grid{
-position:relative;
-z-index:2;
 display:grid;
 grid-template-columns:repeat(4,1fr);
 grid-template-areas:
@@ -73,18 +79,17 @@ margin-top:58px;
 
 .team-header{
 grid-area:header;
-position:relative;
-z-index:2;
-align-self:center;
 padding-right:10px;
 }
 
 .kicker{
-font-size:42px;
-font-weight:900;
+font-family:"Fifa26",Arial,sans-serif;
+font-size:60px;
+line-height:.65;
+letter-spacing:-5px;
+transform:scaleY(1.05);
 color:#17306f;
-letter-spacing:-2px;
-line-height:.9;
+margin-bottom: 20px;
 }
 
 .country-name{
@@ -92,13 +97,11 @@ font-size:40px;
 font-weight:900;
 color:#d92525;
 line-height:.9;
-text-transform:uppercase;
 margin-top:8px;
 }
 
 .association{
 display:flex;
-align-items:center;
 gap:12px;
 margin-top:22px;
 font-size:20px;
@@ -110,11 +113,9 @@ color:#17306f;
 width:70px;
 height:46px;
 background:white;
-border:1px solid #ddd;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:12px;
 font-weight:bold;
 }
 
@@ -123,15 +124,19 @@ aspect-ratio:3/4;
 background:#91a8c8;
 border:4px solid #17306f;
 position:relative;
-padding:10px;
+overflow:hidden;
+cursor:pointer;
 display:flex;
 align-items:center;
 justify-content:center;
-overflow:hidden;
 }
 
 .slot.gold{
 background:#e0a900;
+}
+
+.slot-horizontal{
+aspect-ratio:2/1;
 }
 
 .slot.empty::before{
@@ -154,21 +159,6 @@ bottom:28px;
 height:33%;
 background:#f3f3f3;
 border-radius:0 28px 0 0;
-}
-
-.slot-horizontal{
-aspect-ratio:2/1;
-}
-
-.slot-horizontal.empty::before{
-top:18px;
-left:22px;
-right:22px;
-height:42%;
-}
-
-.slot-horizontal.empty::after{
-display:none;
 }
 
 .code{
@@ -208,16 +198,8 @@ z-index:2;
 text-transform:uppercase;
 }
 
-.slot-horizontal .code{
-top:34px;
-}
-
-.slot-horizontal .number{
-top:58px;
-}
-
-.slot-horizontal .name{
-bottom:28px;
+.filled{
+padding:0;
 }
 
 .sticker-img{
@@ -227,22 +209,28 @@ object-fit:cover;
 display:block;
 }
 
+.sticker-label{
+position:absolute;
+bottom:10px;
+left:10px;
+background:white;
+padding:5px 10px;
+font-size:12px;
+font-weight:bold;
+border-radius:8px;
+}
+
 .group-box{
 grid-area:group;
-position:relative;
-width:100%;
-min-height:210px;
 background:#67b556;
 border-radius:140px 0 0 0;
 padding:50px 30px 25px;
 color:white;
-z-index:2;
-align-self:end;
+min-height:210px;
 }
 
 .group-box h3{
 font-size:34px;
-font-weight:900;
 margin-bottom:12px;
 }
 
@@ -251,37 +239,6 @@ display:grid;
 grid-template-columns:1fr 1fr;
 gap:8px;
 font-weight:bold;
-font-size:14px;
-}
-
-.match-strip{
-position:absolute;
-left:34px;
-right:34px;
-bottom:24px;
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-z-index:2;
-}
-
-.match-card{
-background:rgba(255,255,255,.8);
-border-radius:8px;
-padding:8px;
-font-size:11px;
-font-weight:bold;
-color:#17306f;
-}
-
-.spine{
-position:absolute;
-top:0;
-bottom:0;
-right:-10px;
-width:20px;
-background:linear-gradient(90deg,rgba(0,0,0,.25),rgba(255,255,255,.25),rgba(0,0,0,.25));
-z-index:5;
 }
 
 .slot-1{grid-area:s1;}
@@ -303,37 +260,6 @@ z-index:5;
 .slot-17{grid-area:s17;}
 .slot-18{grid-area:s18;}
 .slot-19{grid-area:s19;}
-
-@media(max-width:900px){
-.album-test{
-grid-template-columns:1fr;
-}
-
-.left-page .stickers-grid,
-.right-page .stickers-grid{
-grid-template-columns:repeat(2,1fr);
-grid-template-areas:none;
-}
-
-.team-header,
-.group-box,
-.slot{
-grid-area:auto;
-}
-
-.slot-horizontal{
-aspect-ratio:3/4;
-}
-
-.match-strip{
-position:relative;
-left:auto;
-right:auto;
-bottom:auto;
-margin-top:30px;
-grid-template-columns:1fr;
-}
-}
 </style>
 </head>
 
@@ -345,81 +271,28 @@ grid-template-columns:1fr;
 
 <div class="stickers-grid">
 
-  <div class="team-header">
-    <div class="kicker">WE ARE</div>
-    <div class="country-name">KOREA REPUBLIC</div>
+<div class="team-header">
+<div class="kicker">WE ARE</div>
+<div class="country-name">KOREA REPUBLIC</div>
 
-    <div class="association">
-      <div class="flag">KOR</div>
-      <div>Korea Football<br>Association</div>
-    </div>
-  </div>
-
-  <div class="slot gold empty slot-1">
-    <div class="code">KOR</div>
-    <div class="number">1</div>
-    <div class="name">Player Name</div>
-  </div>
-
-  <div class="slot empty slot-2">
-    <div class="code">KOR</div>
-    <div class="number">2</div>
-    <div class="name">Player Name</div>
-  </div>
-
-  <div class="slot slot-3">
-    <img src="assets/img/01.png" class="sticker-img" alt="">
-  </div>
-
-  <div class="slot empty slot-4">
-    <div class="code">KOR</div>
-    <div class="number">4</div>
-    <div class="name">Player Name</div>
-  </div>
-
-  <div class="slot empty slot-5">
-    <div class="code">KOR</div>
-    <div class="number">5</div>
-    <div class="name">Player Name</div>
-  </div>
-
-  <div class="slot empty slot-6">
-    <div class="code">KOR</div>
-    <div class="number">6</div>
-    <div class="name">Player Name</div>
-  </div>
-
-  <div class="slot empty slot-7">
-    <div class="code">KOR</div>
-    <div class="number">7</div>
-    <div class="name">Player Name</div>
-  </div>
-
-  <div class="slot slot-8">
-    <img src="assets/img/01.png" class="sticker-img" alt="">
-  </div>
-
-  <div class="slot empty slot-9">
-    <div class="code">KOR</div>
-    <div class="number">9</div>
-    <div class="name">Player Name</div>
-  </div>
-
-  <div class="slot empty slot-10">
-    <div class="code">KOR</div>
-    <div class="number">10</div>
-    <div class="name">Player Name</div>
-  </div>
-
+<div class="association">
+<div class="flag">KOR</div>
+<div>Korea Football<br>Association</div>
+</div>
 </div>
 
-<div class="match-strip">
-  <div class="match-card">Round 1<br>Korea Republic vs Czechia</div>
-  <div class="match-card">Round 2<br>Mexico vs Korea Republic</div>
-  <div class="match-card">Round 3<br>South Africa vs Korea Republic</div>
-</div>
+<div class="slot gold empty slot-1 sticker-slot" data-id="1"></div>
+<div class="slot empty slot-2 sticker-slot" data-id="2"></div>
+<div class="slot empty slot-3 sticker-slot" data-id="3"></div>
+<div class="slot empty slot-4 sticker-slot" data-id="4"></div>
+<div class="slot empty slot-5 sticker-slot" data-id="5"></div>
+<div class="slot empty slot-6 sticker-slot" data-id="6"></div>
+<div class="slot empty slot-7 sticker-slot" data-id="7"></div>
+<div class="slot empty slot-8 sticker-slot" data-id="8"></div>
+<div class="slot empty slot-9 sticker-slot" data-id="9"></div>
+<div class="slot empty slot-10 sticker-slot" data-id="10"></div>
 
-<div class="spine"></div>
+</div>
 
 </section>
 
@@ -427,75 +300,150 @@ grid-template-columns:1fr;
 
 <div class="stickers-grid">
 
-  <div class="slot empty slot-11">
-    <div class="code">KOR</div>
-    <div class="number">11</div>
-    <div class="name">Player Name</div>
-  </div>
+<div class="slot empty slot-11 sticker-slot" data-id="11"></div>
+<div class="slot empty slot-12 sticker-slot" data-id="12"></div>
 
-  <div class="slot empty slot-12">
-    <div class="code">KOR</div>
-    <div class="number">12</div>
-    <div class="name">Player Name</div>
-  </div>
+<div class="slot gold empty slot-13 slot-horizontal sticker-slot"
+data-id="13"></div>
 
-  <div class="slot gold empty slot-13 slot-horizontal">
-    <div class="code">KOR</div>
-    <div class="number">13</div>
-    <div class="name">Special Sticker</div>
-  </div>
+<div class="slot empty slot-14 sticker-slot" data-id="14"></div>
+<div class="slot empty slot-15 sticker-slot" data-id="15"></div>
+<div class="slot empty slot-16 sticker-slot" data-id="16"></div>
+<div class="slot empty slot-17 sticker-slot" data-id="17"></div>
 
-  <div class="slot empty slot-14">
-    <div class="code">KOR</div>
-    <div class="number">14</div>
-    <div class="name">Player Name</div>
-  </div>
+<div class="group-box">
+<h3>GROUP A</h3>
 
-  <div class="slot empty slot-15">
-    <div class="code">KOR</div>
-    <div class="number">15</div>
-    <div class="name">Player Name</div>
-  </div>
+<div class="group-teams">
+<span>MEX 🇲🇽</span>
+<span>RSA 🇿🇦</span>
+<span>KOR 🇰🇷</span>
+<span>CZE 🇨🇿</span>
+</div>
 
-  <div class="slot empty slot-16">
-    <div class="code">KOR</div>
-    <div class="number">16</div>
-    <div class="name">Player Name</div>
-  </div>
+</div>
 
-  <div class="slot empty slot-17">
-    <div class="code">KOR</div>
-    <div class="number">17</div>
-    <div class="name">Player Name</div>
-  </div>
-
-  <div class="group-box">
-    <h3>GROUP A</h3>
-    <div class="group-teams">
-      <span>MEX 🇲🇽</span>
-      <span>RSA 🇿🇦</span>
-      <span>KOR 🇰🇷</span>
-      <span>CZE 🇨🇿</span>
-    </div>
-  </div>
-
-  <div class="slot empty slot-18">
-    <div class="code">KOR</div>
-    <div class="number">18</div>
-    <div class="name">Player Name</div>
-  </div>
-
-  <div class="slot empty slot-19">
-    <div class="code">KOR</div>
-    <div class="number">19</div>
-    <div class="name">Player Name</div>
-  </div>
+<div class="slot empty slot-18 sticker-slot" data-id="18"></div>
+<div class="slot empty slot-19 sticker-slot" data-id="19"></div>
 
 </div>
 
 </section>
 
 </div>
+
+<script>
+
+const slots =
+document.querySelectorAll(
+".sticker-slot"
+);
+
+let albumData =
+JSON.parse(
+localStorage.getItem(
+"teamAlbum"
+)
+) || {};
+
+render();
+
+slots.forEach(slot=>{
+
+slot.addEventListener(
+"click",
+()=>{
+
+const id =
+slot.dataset.id;
+
+albumData[id] =
+!albumData[id];
+
+saveAlbum();
+
+render();
+
+}
+);
+
+});
+
+function render(){
+
+slots.forEach(slot=>{
+
+const id =
+slot.dataset.id;
+
+slot.innerHTML="";
+
+slot.classList.remove(
+"filled"
+);
+
+slot.classList.add(
+"empty"
+);
+
+if(albumData[id]){
+
+slot.classList.add(
+"filled"
+);
+
+slot.classList.remove(
+"empty"
+);
+
+slot.innerHTML=
+`
+<img
+src="assets/img/01.png"
+class="sticker-img">
+
+<div class="sticker-label">
+
+KOR ${id}
+
+</div>
+`;
+
+}else{
+
+slot.innerHTML=
+`
+<div class="code">
+KOR
+</div>
+
+<div class="number">
+${id}
+</div>
+
+<div class="name">
+PLAYER
+</div>
+`;
+
+}
+
+});
+
+}
+
+function saveAlbum(){
+
+localStorage.setItem(
+"teamAlbum",
+JSON.stringify(
+albumData
+)
+);
+
+}
+
+</script>
 
 </body>
 </html>
