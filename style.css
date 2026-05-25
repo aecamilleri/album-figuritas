@@ -134,3 +134,17 @@ font-size:22px;
 font-weight:bold;
 
 }
+
+.slot.completed{
+
+background:#ffe680;
+
+border:
+
+3px solid #d6a400;
+
+box-shadow:
+
+0 10px 25px rgba(0,0,0,.15);
+
+}
