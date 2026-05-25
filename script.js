@@ -74,7 +74,6 @@ div.classList.add(
 );
 
 div.innerHTML =
-
 `
 <img
 src="assets/img/01.png"
@@ -85,7 +84,6 @@ class="sticker-image">
 FIG ${sticker.id}
 
 </div>
-
 `;
 
 }else{
@@ -112,6 +110,8 @@ div
 
 });
 
+updateProgress();
+
 }
 
 function saveAlbum(){
@@ -120,5 +120,37 @@ localStorage.setItem(
 "albumFiguritas",
 JSON.stringify(albumData)
 );
+
+}
+
+function updateProgress(){
+
+const completed =
+albumData.filter(
+sticker => sticker.completed
+).length;
+
+const progressText =
+document.getElementById(
+"progressText"
+);
+
+const progressFill =
+document.getElementById(
+"progressFill"
+);
+
+if(!progressText || !progressFill){
+return;
+}
+
+progressText.innerHTML =
+completed +
+" / " +
+TOTAL_STICKERS +
+" figuritas pegadas";
+
+progressFill.style.width =
+(completed / TOTAL_STICKERS) * 100 + "%";
 
 }
