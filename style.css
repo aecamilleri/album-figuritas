@@ -4,6 +4,13 @@ padding:0;
 box-sizing:border-box;
 }
 
+@font-face{
+font-family:"Fifa26";
+src:url("assets/fonts/fifa-26.otf.woff2") format("woff2");
+font-weight:900;
+font-style:normal;
+}
+
 body{
 font-family:Arial, Helvetica, sans-serif;
 background:#e4d8b5;
@@ -384,4 +391,117 @@ font-size:54px;
 font-size:30px;
 }
 
+}
+
+.album-cover-worldcup{
+position:relative;
+max-width:760px;
+min-height:620px;
+margin:6vh auto 0;
+background:#ffffff;
+border-radius:24px;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 25px 60px rgba(0,0,0,.18);
+}
+
+.cover-side{
+position:absolute;
+top:0;
+bottom:0;
+width:150px;
+display:flex;
+flex-direction:column;
+justify-content:space-around;
+font-family:"Fifa26", Arial, sans-serif;
+font-size:130px;
+font-weight:900;
+line-height:.75;
+opacity:.95;
+z-index:1;
+}
+
+.cover-side span:nth-child(1){color:#ef3b2d;}
+.cover-side span:nth-child(2){color:#b8d93b;}
+.cover-side span:nth-child(3){color:#2356a5;}
+.cover-side span:nth-child(4){color:#78bd68;}
+
+.cover-side-left{
+left:-20px;
+align-items:flex-start;
+}
+
+.cover-side-right{
+right:-20px;
+align-items:flex-end;
+}
+
+.cover-center{
+position:relative;
+z-index:3;
+text-align:center;
+}
+
+.cover-year{
+font-family:"Fifa26", Arial, sans-serif;
+font-size:170px;
+font-weight:900;
+line-height:.75;
+color:#000;
+letter-spacing:-8px;
+}
+
+.cover-trophy-placeholder{
+width:170px;
+height:260px;
+margin:-30px auto 20px;
+border-radius:90px 90px 35px 35px;
+background:linear-gradient(135deg,#d9a323,#fff0a8,#9b6b12);
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900;
+font-size:22px;
+color:#533600;
+box-shadow:0 18px 35px rgba(0,0,0,.25);
+}
+
+.cover-brand{
+font-size:42px;
+font-weight:900;
+letter-spacing:2px;
+margin-bottom:28px;
+}
+
+.album-cover-worldcup button{
+background:#000;
+color:#fff;
+border-radius:999px;
+padding:14px 30px;
+}
+
+@media(max-width:768px){
+.album-cover-worldcup{
+min-height:540px;
+}
+
+.cover-side{
+width:95px;
+font-size:86px;
+}
+
+.cover-year{
+font-size:110px;
+}
+
+.cover-trophy-placeholder{
+width:130px;
+height:210px;
+}
+
+.cover-brand{
+font-size:30px;
+}
 }
